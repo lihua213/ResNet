@@ -158,10 +158,16 @@ if __name__ == "__main__":
     parser.add_argument('--kv-store', type=str, default='device', help='the kvstore type')
     parser.add_argument('--model-load-epoch', type=int, default=0,
                         help='load the model on an epoch using the model-load-prefix')
-    parser.add_argument('--frequent', type=int, default=50, help='frequency of logging')
+    parser.add_argument('--frequent', type=int, default=100, help='frequency of logging')
+    parser.add_argument('--log-dir', type=str, default='./', help='file logger dir')
     parser.add_argument('--memonger', action='store_true', default=False,
                         help='true means using memonger to save momory, https://github.com/dmlc/mxnet-memonger')
     parser.add_argument('--retrain', action='store_true', default=False, help='true means continue training')
     args = parser.parse_args()
+    import os
+    mxnet_version = mx.__version__
+    mxnet_daily = os.environ.get('MXNET_NIGHTLY', 'Unknown')
+    fh = logging.FileHandler(os.path.join(args.log_dir, 'resnet_{}_{}_{}.log'.format(args.depth, mxnet_version, mxnet_daily)))
+    logger.addHandler(fh)
     logging.info(args)
     main()
