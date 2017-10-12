@@ -10,4 +10,4 @@ export MXNET_CUDNN_AUTOTUNE_DEFAULT=1
 
 ## train resnet-50
 python -u train_resnet.py --data-dir ~/data/ --data-type imagenet --depth 18 \
-       --batch-size 256 --gpus=0,1,2,3,4,5,6,7
+       --batch-size 256 --gpus=0,1,2,3,4,5,6,7 | tee train.log
