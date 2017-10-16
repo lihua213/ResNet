@@ -116,8 +116,8 @@ def main():
         learning_rate       = args.lr,
         momentum            = args.mom,
         wd                  = args.wd,
-        optimizer           = 'nag',
-        # optimizer          = 'sgd',
+        # optimizer           = 'nag',
+        optimizer          = 'sgd',
         initializer         = mx.init.Xavier(rnd_type='gaussian', factor_type="in", magnitude=2),
         lr_scheduler        = multi_factor_scheduler(begin_epoch, epoch_size, step=[120, 160], factor=0.1)
                              if args.data_type=='cifar10' else
